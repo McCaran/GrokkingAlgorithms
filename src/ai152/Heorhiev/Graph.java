@@ -3,17 +3,34 @@ package ai152.Heorhiev;
 import java.util.HashMap;
 import java.util.HashSet;
 
+/**
+ * Класс, реализующий граф
+ * основой реализации является хэш-карта, ключом которой является узел(вершина)
+ * а значения для этого узла - множество его соседей
+ * содержит методы для добавления и получения узлов, ребер
+ * а так же тестовый метод для проверки работы графа
+ */
+
 public class Graph {
     //Ключом является узел, значением - набор соседних элементов
     private HashMap<Node, HashSet<Node>> graph = new HashMap<>();
 
-    public void addNode(Node... node) {
-        for (Node n: node) {
-            if (graph.containsKey(node)) {
-                System.out.println("Узел " + n.getName() + " уже есть в графе");
-                continue;
+    public void addNode(Node node) {
+        if (graph.containsKey(node)) {
+            System.out.println("Узел " + node.getName() + " уже есть в графе");
+            return;
+        }
+        graph.put(node, new HashSet<>());
+    }
+
+    public void addNodes(Node[] nodes) {
+        if (nodes.length == 0) {
+            System.out.println("Элементы отсутствуют");
+            return;
+        } else {
+            for (Node node : nodes) {
+                if (node != null) addNode(node);
             }
-            graph.put(n, new HashSet<>());
         }
     }
 
@@ -54,7 +71,13 @@ public class Graph {
         Node nodeD = new Node("D");
         Node nodeE = new Node("E");
         System.out.println(graph);
-        graph.addNode(nodeA,nodeB,nodeC,nodeD,nodeE);
+        graph.addNode(nodeA);
+        Node[] nodes = {nodeB, nodeC, nodeD, nodeE,};
+        graph.addNodes(nodes);
+        graph.addNode(nodeB);
+        graph.addNode(nodeC);
+        graph.addNode(nodeD);
+        graph.addNode(nodeE);
         graph.addEdge(nodeA, nodeB);
         graph.addEdge(nodeA, nodeC);
         graph.addEdge(nodeA, nodeD);
@@ -76,13 +99,13 @@ public class Graph {
             return "Граф пуст";
         }
         StringBuilder sb = new StringBuilder();
-        for (Node node: graph.keySet()) {
+        for (Node node : graph.keySet()) {
             sb.append("Узел " + node.getName() + ".");
             if (graph.get(node).isEmpty()) {
                 sb.append("Соседи отсутствуют\n");
             } else {
                 sb.append("Соседи: ");
-                for (Node relative: graph.get(node)) {
+                for (Node relative : graph.get(node)) {
                     sb.append(" " + relative.getName());
                 }
                 sb.append("\n");
@@ -90,6 +113,5 @@ public class Graph {
         }
         return sb.toString();
     }
-
 
 }

@@ -1,7 +1,13 @@
 package ai152.Heorhiev;
 
+/**
+ * класс, реализующий узел графа
+ * переопределяет hashCode и equals для корректной работы с хэш-картой
+ */
+
 public class Node {
     private String name;
+
     public Node(String name) {
         this.name = name;
     }

@@ -2,6 +2,11 @@ package ai152.Heorhiev;
 
 import java.util.*;
 
+/**
+ * Класс, реализующий методы поиска в глубину для графа
+ * содержит метод для инициализации поиска и основной рекурсивынй метод поиска
+ */
+
 public class DepthFirstSearch {
     private Graph graph;
     private HashSet<Node> visitedNodes = new HashSet<>();
@@ -17,7 +22,7 @@ public class DepthFirstSearch {
         search(startNode, endNode);
     }
 
-    public void search(Node startNode, Node endNode) {
+    private void search(Node startNode, Node endNode) {
         path.push(startNode);
         Node curNode = startNode;
         Iterator iterator = graph.getRelatives(startNode).iterator();

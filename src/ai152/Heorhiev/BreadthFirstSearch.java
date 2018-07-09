@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+/**
+ * Класс, реализующий методы поиска в ширину с графом
+ * содержит основной метод поиска и вспомогательрный метод для построения
+ * после окончания поиска
+ */
+
 public class BreadthFirstSearch {
     private Graph graph;
     private ArrayList<Node> visitedNodes = new ArrayList<>();
@@ -13,7 +19,6 @@ public class BreadthFirstSearch {
     public BreadthFirstSearch(Graph graph) {
         this.graph = graph;
     }
-
 
     public LinkedList<Node> search(Node startNode, Node endNode) {
         visitedNodes.clear();
@@ -40,8 +45,8 @@ public class BreadthFirstSearch {
         }
         if (parentage.containsKey(endNode)) {
             return buildPath(endNode);
-        } else return null;
-
+        }
+        return null;
     }
 
     private LinkedList<Node> buildPath(Node endNode) {
